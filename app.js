@@ -36,6 +36,11 @@ app.get(endpoints(), (req, res) => {
   res.send(getTemplate().replace('{{content}}', converter.makeHtml(content)));
 });
 
+app.use(function (req, res, next) {
+  res.status(404).send("Sorry can't find that!")
+})
+
+
 app.listen(port, () => {
   console.log(`Listening to requests on http://localhost:${port}`);
 });
