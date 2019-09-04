@@ -3,7 +3,7 @@
 ## Introduction
 A solution to the PensionBee tech test. 
 
-Original instructions can be found [here](insert link to readme).
+Original instructions can be found [here](https://github.com/ajosephides/pensionBee-tech-test/blob/master/README_original_instructions.md).
 
 ## To run
 * please clone repo
