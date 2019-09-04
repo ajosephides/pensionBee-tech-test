@@ -24,5 +24,4 @@ let getContent = (req, rootDir) => {return fs.readFileSync(rootDir + `/content${
 });
 }
 
-
 module.exports = {endpoints: endpoints, getTemplate: getTemplate, getContent: getContent}
