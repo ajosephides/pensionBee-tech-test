@@ -1,9 +1,11 @@
 const express = require("express");
 const fs = require('fs')
+const showdown = require('showdown')
 
 const app = express();
 const port = process.env.PORT || "8888";
 
+let converter = new showdown.Converter();
 
 const endpoints = () => {
   const folderPath = __dirname + '/content'
@@ -30,7 +32,8 @@ app.get(endpoints(), (req, res) => {
     }
   });
   
-  res.send(content)
+  res.status(200)
+  res.send(getTemplate().replace('{{content}}', converter.makeHtml(content)));
 });
 
 app.listen(port, () => {
