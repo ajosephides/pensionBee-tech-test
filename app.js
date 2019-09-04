@@ -20,9 +20,17 @@ let getTemplate = () => { return fs.readFileSync(__dirname + '/template.html', '
   });
 }
 
-
 app.get(endpoints(), (req, res) => {
-  res.send('Hello world')
+  
+  let content = fs.readFileSync(__dirname + `/content${req.url}/index.md`, 'utf-8', function(err, data) {
+    if (err) {
+      console.log('content not found ' + err);
+    } else{
+      return data;
+    }
+  });
+  
+  res.send(content)
 });
 
 app.listen(port, () => {
