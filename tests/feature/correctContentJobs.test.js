@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
 
 describe('Goes to job page and gets right content', () => {
-  it.skip('finds a snippet of text that is expected', async() => {
+  
+  it('finds a snippet of text that is expected', async() => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto('http://localhost:8888/jobs');
