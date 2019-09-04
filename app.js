@@ -1,39 +1,19 @@
 const express = require("express");
 const fs = require('fs')
 const showdown = require('showdown')
+const Server = require('./model/server')
 
 const app = express();
 const port = process.env.PORT || "8888";
 
 let converter = new showdown.Converter();
 
-const endpoints = () => {
-  const folderPath = __dirname + '/content'
-  const folders = fs.readdirSync(folderPath);
-  return folders.map(fileName => {return `/${fileName}`});
-}
+app.get(Server.endpoints(__dirname), (req, res) => {
 
-let getTemplate = () => { return fs.readFileSync(__dirname + '/template.html', 'utf-8', function(err, data) {
-  if (err) {
-    console.log('Template not found ' + err);
-  } else{
-      return data;
-    }
-  });
-}
-
-app.get(endpoints(), (req, res) => {
-  
-  let content = fs.readFileSync(__dirname + `/content${req.url}/index.md`, 'utf-8', function(err, data) {
-    if (err) {
-      console.log('content not found ' + err);
-    } else{
-      return data;
-    }
-  });
-  
+  let template = Server.getTemplate(__dirname)
+  let content = Server.getContent(req, __dirname)
   res.status(200)
-  res.send(getTemplate().replace('{{content}}', converter.makeHtml(content)));
+  res.send(template.replace('{{content}}', converter.makeHtml(content)));
 });
 
 app.use(function (req, res, next) {
@@ -44,5 +24,3 @@ app.use(function (req, res, next) {
 app.listen(port, () => {
   console.log(`Listening to requests on http://localhost:${port}`);
 });
-
-module.exports = {endpoints: endpoints, getTemplate: getTemplate}
