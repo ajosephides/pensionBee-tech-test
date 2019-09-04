@@ -2,9 +2,9 @@
   "name": "pension-bee-tech-test",
   "version": "1.0.0",
   "description": "A solution to the PensionBee tech test",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "start": "nodemon ./app.js"
   },
   "repository": {
@@ -15,9 +15,16 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "jest": "^24.9.0",
     "nodemon": "^1.19.2",
-    "puppeteer": "^1.19.0",
     "showdown": "^1.9.0"
+  },
+  "jest": {
+    "preset": "jest-puppeteer",
+    "verbose": true
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
+    "puppeteer": "^1.19.0"
   }
 }

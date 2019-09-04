@@ -9,7 +9,6 @@ const port = process.env.PORT || "8888";
 let converter = new showdown.Converter();
 
 app.get(Server.endpoints(__dirname), (req, res) => {
-
   let template = Server.getTemplate(__dirname)
   let content = Server.getContent(req, __dirname)
   res.status(200)
